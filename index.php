@@ -14,6 +14,8 @@ if ($result) {
     $title = $row['title'];
     $image = $row['image'];
     $isbn_code = $row['isbn_code'];
+    $short_description = $row['short_description'];
+    $type = $row['type'];
     $author_first_name = $row['author_first_name'];
     $author_last_name = $row['author_last_name'];
     $publisher_name = $row['publisher_name'];
@@ -46,7 +48,7 @@ if ($result) {
 </head>
 
 <body>
-  <div class="container">
+  <div class="container mt-4">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4">
       <?= $layout ?>
     </div>

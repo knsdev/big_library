@@ -5,7 +5,7 @@ $username = "root";
 $password = null;
 $databaseName = "be25_exam4_kimschlueter_biglibrary";
 
-$conn = mysqli_connect($hostname, $username, $password, $databaseName);
+$conn = new mysqli($hostname, $username, $password, $databaseName);
 
 if (!$conn) {
   die("Database connection failed!");

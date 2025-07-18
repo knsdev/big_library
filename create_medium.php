@@ -1,0 +1,138 @@
+<?php
+require_once './db_connect.php';
+
+if (isset($_POST['create'])) {
+  echo '<pre>';
+  var_dump($_POST);
+  echo '</pre>';
+
+  $sql = "INSERT INTO `medium`(
+    `title`,
+    `image`,
+    `isbn_code`,
+    `short_description`,
+    `type`,
+    `author_first_name`,
+    `author_last_name`,
+    `publisher_name`,
+    `publisher_address`,
+    `publish_date`)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+  $statement = $conn->prepare($sql);
+
+  $title = $_POST['title'];
+  $image = $_POST['image'];
+  $isbn_code = $_POST['isbn_code'];
+  $short_description = $_POST['short_description'];
+  $type = $_POST['type'];
+  $author_first_name = $_POST['author_first_name'];
+  $author_last_name = $_POST['author_last_name'];
+  $publisher_name = $_POST['publisher_name'];
+  $publisher_address = $_POST['publisher_address'];
+  $publish_date = $_POST['publish_date'];
+
+  $statement->bind_param(
+    "ssssssssss",
+    $title,
+    $image,
+    $isbn_code,
+    $short_description,
+    $type,
+    $author_first_name,
+    $author_last_name,
+    $publisher_name,
+    $publisher_address,
+    $publish_date
+  );
+
+  if ($statement->execute()) {
+    echo "New medium created successfully";
+  } else {
+    echo "Error: " . $statement->error;
+  }
+
+  $statement->close();
+  $conn->close();
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Medium</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container mt-4">
+    <form method="POST">
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="title">Title:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="title" id="title" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="image">Image:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="image" id="image" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="isbn_code">ISBN:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="short_description">Short Description:</label></div>
+        <div class="col-8 col-sm-6 col-md-4">
+          <textarea name="short_description" id="short_description" rows="7" maxlength="255" class="form-control"></textarea>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="type">Type:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="type" id="type" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="author_first_name">Author First Name:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="author_last_name">Author Last Name:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="publisher_name">Publisher Name:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="publisher_address">Publisher Address:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"></div>
+        <div class="col-8 col-sm-6 col-md-4">
+          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:100%">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+
+</html>
