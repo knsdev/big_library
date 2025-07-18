@@ -30,7 +30,7 @@ if ($result) {
       $title .= "...";
     }
 
-    $layout .= "<div>
+    $layout .= "<div class='col' style='width: fit-content'>
                   <div class='card mb-3' style='width: 18rem'>
                     <img src='$image' class='card-img-top' alt=''>
                     <div class='card-body'>
@@ -67,7 +67,7 @@ if ($result) {
 <body>
   <div class="container mt-4">
     <a href="./create_medium.php" class="btn btn-primary mb-4">Create new Medium</a>
-    <div class="row row-cols-3 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 justify-content-center">
       <?= $layout ?>
     </div>
   </div>
