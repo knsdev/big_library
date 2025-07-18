@@ -32,8 +32,8 @@ if (isset($_GET['id'])) {
                      <div class='card-body'>
                        <h5 class='card-title'>$title</h5>
                        <p class='card-text'>$short_description</p>
-                       <p class='card-text'>$type</p>
-                       <p class='card-text'>$isbn_code</p>
+                       <p class='card-text'>Type: $type</p>
+                       <p class='card-text'>ISBN: $isbn_code</p>
                        <p class='card-text'>Author: $author_first_name $author_last_name</p>
                        <p class='card-text'>Published on $publish_date by $publisher_name, $publisher_address</p>
                        <p class='card-text'>$status</p>
