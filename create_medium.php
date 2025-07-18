@@ -16,8 +16,9 @@ if (isset($_POST['create'])) {
     `author_last_name`,
     `publisher_name`,
     `publisher_address`,
-    `publish_date`)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    `publish_date`,
+    `status`)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   $statement = $conn->prepare($sql);
 
@@ -31,9 +32,10 @@ if (isset($_POST['create'])) {
   $publisher_name = $_POST['publisher_name'];
   $publisher_address = $_POST['publisher_address'];
   $publish_date = $_POST['publish_date'];
+  $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
 
   $statement->bind_param(
-    "ssssssssss",
+    "ssssssssssi",
     $title,
     $image,
     $isbn_code,
@@ -43,7 +45,8 @@ if (isset($_POST['create'])) {
     $author_last_name,
     $publisher_name,
     $publisher_address,
-    $publish_date
+    $publish_date,
+    $status
   );
 
   if ($statement->execute()) {
@@ -121,6 +124,16 @@ if (isset($_POST['create'])) {
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
         <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" class="form-control"></div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
+        <div class="col-8 col-sm-6 col-md-4">
+          <select name="status" id="status">
+            <option value="1">Available</option>
+            <option value="0">Reserved</option>
+          </select>
+        </div>
       </div>
 
       <div class="row mb-2">

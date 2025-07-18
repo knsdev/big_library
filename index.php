@@ -21,6 +21,7 @@ if ($result) {
     $publisher_name = $row['publisher_name'];
     $publisher_address = $row['publisher_address'];
     $publish_date = $row['publish_date'];
+    $status = ($row['status']) ? "Available" : "Reserved";
 
     $layout .= "<div>
                   <div class='card' style='width: 18rem;'>

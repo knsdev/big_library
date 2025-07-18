@@ -6,7 +6,7 @@ $layout = "";
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 
-  $sql = "SELECT * FROM `medium`";
+  $sql = "SELECT * FROM `medium` WHERE id=$id";
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
@@ -24,6 +24,7 @@ if (isset($_GET['id'])) {
       $publisher_name = $row['publisher_name'];
       $publisher_address = $row['publisher_address'];
       $publish_date = $row['publish_date'];
+      $status = ($row['status']) ? "Available" : "Reserved";
 
       $layout = "<div>
                    <div class='card' style='width: 18rem;'>
@@ -35,6 +36,7 @@ if (isset($_GET['id'])) {
                        <p class='card-text'>$isbn_code</p>
                        <p class='card-text'>Author: $author_first_name $author_last_name</p>
                        <p class='card-text'>Published on $publish_date by $publisher_name, $publisher_address</p>
+                       <p class='card-text'>$status</p>
                        <a href='./index.php' class='btn btn-secondary'>Back</a>
                      </div>
                    </div>
