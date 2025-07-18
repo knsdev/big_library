@@ -23,12 +23,20 @@ if ($result) {
     $publish_date = $row['publish_date'];
     $status = ($row['status']) ? "Available" : "Reserved";
 
+    $title_max_length = 30;
+
+    if (strlen($title) > $title_max_length) {
+      $title = substr($title, 0, $title_max_length - 3);
+      $title .= "...";
+    }
+
     $layout .= "<div>
-                  <div class='card' style='width: 18rem;'>
+                  <div class='card mb-3' style='width: 18rem'>
                     <img src='$image' class='card-img-top' alt=''>
                     <div class='card-body'>
-                      <h5 class='card-title'>$title</h5>
-                      <p class='card-text'>$short_description</p>
+                      <h5 class='card-title mb-2'>$title</h5>
+                      <p class='card-text mb-2'>$type</p>
+                      <p class='card-text'>$status</p>
                       <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
                     </div>
                   </div>
@@ -46,12 +54,20 @@ if ($result) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Big Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    .card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      object-position: top;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container mt-4">
     <a href="./create_medium.php" class="btn btn-primary mb-4">Create new Medium</a>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4">
+    <div class="row row-cols-3 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4">
       <?= $layout ?>
     </div>
   </div>

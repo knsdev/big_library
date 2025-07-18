@@ -31,9 +31,9 @@ function insert_new_medium()
   if ($input_error_messages)
     return;
 
-  echo '<pre>';
-  var_dump($_POST);
-  echo '</pre>';
+  // echo '<pre>';
+  // var_dump($_POST);
+  // echo '</pre>';
 
   $sql = "INSERT INTO `medium`(
     `title`,
@@ -113,7 +113,7 @@ if (isset($_POST['create'])) {
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="short_description">Short Description:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <textarea name="short_description" id="short_description" rows="7" maxlength="255" class="form-control"></textarea>
+          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"></textarea>
         </div>
       </div>
 
