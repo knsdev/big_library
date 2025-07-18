@@ -50,6 +50,7 @@ if ($result) {
 
 <body>
   <div class="container mt-4">
+    <a href="./create_medium.php" class="btn btn-primary mb-4">Create new Medium</a>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4">
       <?= $layout ?>
     </div>

@@ -1,7 +1,36 @@
 <?php
 require_once './db_connect.php';
 
-if (isset($_POST['create'])) {
+$input_error_messages = "";
+
+function insert_new_medium()
+{
+  global $conn;
+  global $input_error_messages;
+
+  $title = $_POST['title'];
+  $image = $_POST['image'];
+  $isbn_code = $_POST['isbn_code'];
+  $short_description = $_POST['short_description'];
+  $type = $_POST['type'];
+  $author_first_name = $_POST['author_first_name'];
+  $author_last_name = $_POST['author_last_name'];
+  $publisher_name = $_POST['publisher_name'];
+  $publisher_address = $_POST['publisher_address'];
+  $publish_date = $_POST['publish_date'];
+  $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
+
+  if (empty($title)) {
+    $input_error_messages .= 'Title is not allowed to be empty!<br />';
+  }
+
+  if (empty($type)) {
+    $input_error_messages .= 'Type is not allowed to be empty!<br />';
+  }
+
+  if ($input_error_messages)
+    return;
+
   echo '<pre>';
   var_dump($_POST);
   echo '</pre>';
@@ -21,18 +50,6 @@ if (isset($_POST['create'])) {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   $statement = $conn->prepare($sql);
-
-  $title = $_POST['title'];
-  $image = $_POST['image'];
-  $isbn_code = $_POST['isbn_code'];
-  $short_description = $_POST['short_description'];
-  $type = $_POST['type'];
-  $author_first_name = $_POST['author_first_name'];
-  $author_last_name = $_POST['author_last_name'];
-  $publisher_name = $_POST['publisher_name'];
-  $publisher_address = $_POST['publisher_address'];
-  $publish_date = $_POST['publish_date'];
-  $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
 
   $statement->bind_param(
     "ssssssssssi",
@@ -56,6 +73,10 @@ if (isset($_POST['create'])) {
   }
 
   $statement->close();
+}
+
+if (isset($_POST['create'])) {
+  insert_new_medium();
   $conn->close();
 }
 
@@ -126,7 +147,7 @@ if (isset($_POST['create'])) {
         <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" class="form-control"></div>
       </div>
 
-      <div class="row mb-2">
+      <div class="row mb-4">
         <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
           <select name="status" id="status">
@@ -136,10 +157,24 @@ if (isset($_POST['create'])) {
         </div>
       </div>
 
+      <div class="row mb-4">
+        <div class="col-3 col-md-2"></div>
+        <div class="col-8 col-sm-6 col-md-4">
+          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:50%">
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-3 col-md-2"></div>
+        <div class="col-8 col-sm-6 col-md-4">
+          <?= $input_error_messages ?>
+        </div>
+      </div>
+
       <div class="row mb-2">
         <div class="col-3 col-md-2"></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:100%">
+          <a href="./index.php" class="btn btn-secondary" style="width:50%">Back</a>
         </div>
       </div>
     </form>
