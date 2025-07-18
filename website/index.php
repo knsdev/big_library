@@ -35,6 +35,7 @@ if ($result) {
                     <img src='$image' class='card-img-top' alt=''>
                     <div class='card-body'>
                       <h5 class='card-title mb-2'>$title</h5>
+                      <p class='card-text mb-2'>$author_first_name $author_last_name</p>
                       <p class='card-text mb-2'>$type</p>
                       <p class='card-text'>$status</p>
                       <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
