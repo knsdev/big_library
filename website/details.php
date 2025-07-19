@@ -26,8 +26,12 @@ if (isset($_GET['id'])) {
       $publish_date = $row['publish_date'];
       $status = ($row['status']) ? "Available" : "Reserved";
 
-      $publish_date_obj = date_create($publish_date);
-      $publish_date = date_format($publish_date_obj, "F j, Y");
+      if (!empty($publish_date) && $publish_date != "0000-00-00") {
+        $publish_date_obj = date_create($publish_date);
+        $publish_date = date_format($publish_date_obj, "F j, Y");
+      } else {
+        $publish_date = "";
+      }
 
       $layout = "<div class='container col-xxl-8 px-4 pt-3'>
                    <div class='row flex-lg-row-reverse align-items-center g-5 py-5'>
