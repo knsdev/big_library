@@ -36,8 +36,8 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class='col-lg-6'>
                       <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>$title</h1>
-                      <p class='lead'>$short_description</p>
-                      <div class='mb-4'>
+                      <p class='h5 lh-base'>$short_description</p>
+                      <div class='mt-3 mb-4'>
                         <ul class='list-group'>
                           <li class='list-group-item'>Type: $type</li>
                           $isbn_code
