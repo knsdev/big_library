@@ -1,4 +1,5 @@
 <?php
+require_once './modal.php';
 
 function limit_string_length($input_string, $max_length)
 {
@@ -54,7 +55,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
                       <div class='d-flex gap-2 justify-content-start align-items-start'>
                         <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
                         <a href='./update_medium.php?id=$id' class='btn btn-success'>Update</a>
-                        <a href='./delete_medium.php?id=$id' class='btn btn-danger'>Delete</a>
+                        <button type='button' class='delete-button btn btn-danger'>Delete</button>
                       </div>
                     </div>
                   </div>
@@ -62,6 +63,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
   }
 
   $layout .= "</div>";
+  $layout .= create_modal_layout();
 
   return $layout;
 }
