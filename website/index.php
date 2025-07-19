@@ -26,7 +26,16 @@ if ($result) {
 
 <body>
   <div class="container mt-4">
-    <a href="./create_medium.php" class="btn btn-primary mb-4">Create new Medium</a>
+    <div class="row mb-4 justify-content-between justify-content-md-start">
+      <div class="col-12 col-sm-5 col-md-4 mb-3 mb-sm-0">
+        <a href="./create_medium.php" class="btn btn-primary">Create new Medium</a>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <form role="search">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
+      </div>
+    </div>
     <?= $layout ?>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
