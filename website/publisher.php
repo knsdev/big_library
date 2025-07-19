@@ -41,7 +41,7 @@ $page_title = "Media published by $publisher_name";
   <div class="container">
     <h1 class="mt-3 mb-4"><?= $page_title ?></h1>
     <?= $layout ?>
-    <a href='./index.php' class='btn btn-secondary btn-lg px-4'>Back</a>
+    <a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>

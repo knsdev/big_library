@@ -10,7 +10,9 @@ if (isset($_POST['search'])) {
   $sql = "SELECT * FROM `medium`
           WHERE `title` LIKE '$search_value%'
              OR `author_first_name` LIKE '$search_value%'
-             OR `author_last_name` LIKE '$search_value%'";
+             OR `author_last_name` LIKE '$search_value%'
+             OR `publisher_name` LIKE '$search_value%'
+             OR `type` LIKE '$search_value%'";
 }
 
 $result = mysqli_query($conn, $sql);
@@ -18,6 +20,10 @@ $result = mysqli_query($conn, $sql);
 if ($result) {
   $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
   $layout = create_media_card_layout($rows, true);
+}
+
+if (isset($_POST['search'])) {
+  $layout .= "<a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>";
 }
 
 ?>

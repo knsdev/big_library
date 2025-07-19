@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
                         </ul>
                       </div>
                       <div class='d-grid gap-2 d-md-flex justify-content-md-start'>
-                        <a href='./index.php' class='btn btn-secondary btn-lg px-4'>Back</a>
+                        <a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>
                       </div>
                     </div>
                    </div>
