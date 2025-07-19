@@ -90,8 +90,9 @@ if (isset($_POST['create'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Medium</title>
+  <title>Big Library - Create Medium</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
@@ -152,7 +153,7 @@ if (isset($_POST['create'])) {
       <div class="row mb-4">
         <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <select name="status" id="status">
+          <select name="status" id="status" class="form-select">
             <option value="1">Available</option>
             <option value="0">Reserved</option>
           </select>

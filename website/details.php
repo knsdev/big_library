@@ -32,9 +32,9 @@ if (isset($_GET['id'])) {
       $layout = "<div class='container col-xxl-8 px-4 pt-3'>
                    <div class='row flex-lg-row-reverse align-items-center g-5 py-5'>
                      <div class='col-10 col-sm-8 col-lg-6'>
-                       <img src='$image' class='d-block mx-lg-auto' alt='' loading='lazy'>
+                       <img src='$image' class='d-block mx-lg-auto shadow' alt='' loading='lazy'>
                     </div>
-                    <div class='col-lg-6'>
+                    <div class='col-lg-6 rounded-2 p-4'>
                       <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>$title</h1>
                       <p class='h5 lh-base'>$short_description</p>
                       <div class='mt-3 mb-4'>
@@ -70,8 +70,9 @@ if (isset($_GET['id'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Details</title>
+  <title>Big Library - Medium Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
   <style>
     img {
       width: 500px;

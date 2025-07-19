@@ -43,7 +43,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
       : "<p class='card-text mb-2'>$publisher_name</p>";
 
     $layout .= "<div class='col' style='width: fit-content'>
-                  <div class='card mb-3' style='width: 18rem'>
+                  <div class='card mb-3 shadow-sm' style='width: 18rem'>
                     <img src='$image' class='card-img-top' alt=''>
                     <div class='card-body'>
                       <h5 class='card-title mb-2'>$title</h5>
