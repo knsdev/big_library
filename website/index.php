@@ -8,11 +8,11 @@ $sql = "SELECT * FROM `medium`";
 if (isset($_POST['search'])) {
   $search_value = $_POST['search'];
   $sql = "SELECT * FROM `medium`
-          WHERE `title` LIKE '$search_value%'
-             OR `author_first_name` LIKE '$search_value%'
-             OR `author_last_name` LIKE '$search_value%'
-             OR `publisher_name` LIKE '$search_value%'
-             OR `type` LIKE '$search_value%'";
+          WHERE `title` LIKE '%$search_value%'
+             OR `author_first_name` LIKE '%$search_value%'
+             OR `author_last_name` LIKE '%$search_value%'
+             OR `publisher_name` LIKE '%$search_value%'
+             OR `type` LIKE '%$search_value%'";
 }
 
 $result = mysqli_query($conn, $sql);
