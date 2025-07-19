@@ -4,6 +4,15 @@ require_once './media_card_layout.php';
 
 $layout = "";
 $sql = "SELECT * FROM `medium`";
+
+if (isset($_POST['search'])) {
+  $search_value = $_POST['search'];
+  $sql = "SELECT * FROM `medium`
+          WHERE `title` LIKE '$search_value%'
+             OR `author_first_name` LIKE '$search_value%'
+             OR `author_last_name` LIKE '$search_value%'";
+}
+
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
@@ -31,8 +40,8 @@ if ($result) {
         <a href="./create_medium.php" class="btn btn-primary">Create new Medium</a>
       </div>
       <div class="col-12 col-sm-6 col-md-4">
-        <form role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <form role="search" method="POST">
+          <input name="search" type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
       </div>
     </div>
