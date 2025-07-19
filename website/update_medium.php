@@ -3,12 +3,37 @@ require_once './db_connect.php';
 
 $input_error_messages = "";
 $result_message = "";
+$id = null;
+$row = null;
 
-function insert_new_medium()
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+
+  $sql = "SELECT * FROM `medium` WHERE id=$id";
+  $result = mysqli_query($conn, $sql);
+
+  if ($result) {
+    $row = mysqli_fetch_assoc($result);
+
+    if ($row) {
+      $id = $row['id'];
+    } else {
+      exit($error_msg_general);
+    }
+  } else {
+    exit($error_msg_general);
+  }
+} else {
+  exit($error_msg_general);
+}
+
+function update_medium()
 {
   global $conn;
   global $input_error_messages;
   global $result_message;
+  global $id;
+  global $row;
 
   $title = $_POST['title'];
   $image = $_POST['image'];
@@ -30,26 +55,23 @@ function insert_new_medium()
     $input_error_messages .= 'Type is not allowed to be empty!<br />';
   }
 
-  if ($input_error_messages)
+  if ($input_error_messages) {
     return;
+  }
 
-  // echo '<pre>';
-  // var_dump($_POST);
-  // echo '</pre>';
-
-  $sql = "INSERT INTO `medium`(
-    `title`,
-    `image`,
-    `isbn_code`,
-    `short_description`,
-    `type`,
-    `author_first_name`,
-    `author_last_name`,
-    `publisher_name`,
-    `publisher_address`,
-    `publish_date`,
-    `status`)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "UPDATE `medium` SET
+    `title` = ?,
+    `image` = ?,
+    `isbn_code` = ?,
+    `short_description` = ?,
+    `type` = ?,
+    `author_first_name` = ?,
+    `author_last_name` = ?,
+    `publisher_name` = ?,
+    `publisher_address` = ?,
+    `publish_date` = ?,
+    `status` = ?
+    WHERE `id` = $id";
 
   $statement = $conn->prepare($sql);
 
@@ -69,7 +91,19 @@ function insert_new_medium()
   );
 
   if ($statement->execute()) {
-    $result_message = "New medium created successfully";
+    $result_message = "Medium updated successfully!";
+
+    $row['title'] = $title;
+    $row['image'] = $image;
+    $row['isbn_code'] = $isbn_code;
+    $row['short_description'] = $short_description;
+    $row['type'] = $type;
+    $row['author_first_name'] = $author_first_name;
+    $row['author_last_name'] = $author_last_name;
+    $row['publisher_name'] = $publisher_name;
+    $row['publisher_address'] = $publisher_address;
+    $row['publish_date'] = $publish_date;
+    $row['status'] = $status;
   } else {
     $result_message = "Error: " . $statement->error;
   }
@@ -77,8 +111,9 @@ function insert_new_medium()
   $statement->close();
 }
 
-if (isset($_POST['create'])) {
-  insert_new_medium();
+
+if (isset($_POST['update'])) {
+  update_medium();
   $conn->close();
 }
 
@@ -99,62 +134,62 @@ if (isset($_POST['create'])) {
     <form method="POST">
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="title">Title:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="title" id="title" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['title'] ?>" type="text" name="title" id="title" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="image">Image:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="image" id="image" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['image'] ?>" type="text" name="image" id="image" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="isbn_code">ISBN:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['isbn_code'] ?>" type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="short_description">Short Description:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"></textarea>
+          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"><?= $row['short_description'] ?></textarea>
         </div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="type">Type:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="type" id="type" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['type'] ?>" type="text" name="type" id="type" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_first_name">Author First Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['author_first_name'] ?>" type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_last_name">Author Last Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['author_last_name'] ?>" type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_name">Publisher Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publisher_name'] ?>" type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_address">Publisher Address:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publisher_address'] ?>" type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publish_date'] ?>" type="text" name="publish_date" id="publish_date" class="form-control"></div>
       </div>
 
       <div class="row mb-4">
         <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
           <select name="status" id="status">
-            <option value="1">Available</option>
-            <option value="0">Reserved</option>
+            <option value="1" <?= ($row['status'] != 0) ? 'selected' : '' ?>>Available</option>
+            <option value="0" <?= ($row['status'] == 0) ? 'selected' : '' ?>>Reserved</option>
           </select>
         </div>
       </div>
@@ -162,7 +197,7 @@ if (isset($_POST['create'])) {
       <div class="row mb-3">
         <div class="col-3 col-md-2"></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:50%">
+          <input type="submit" value="Update" name="update" class="btn btn-success" style="width:50%">
         </div>
       </div>
 

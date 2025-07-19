@@ -51,7 +51,11 @@ function create_media_card_layout($rows, $showLinkToPublisher)
                       <p class='card-text mb-2'>$author_full_name</p>
                       $publisher_html
                       <p class='card-text mb-2'>$status</p>
-                      <a href='./details.php?id=$id' class='btn btn-primary'>Show Details</a>
+                      <div class='d-flex gap-2 justify-content-start align-items-start'>
+                        <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
+                        <a href='./update_medium.php?id=$id' class='btn btn-success'>Update</a>
+                        <a href='./delete_medium.php?id=$id' class='btn btn-danger'>Delete</a>
+                      </div>
                     </div>
                   </div>
                 </div>";
