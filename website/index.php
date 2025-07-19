@@ -30,14 +30,17 @@ if ($result) {
       $title .= "...";
     }
 
+    $publisher_name_url_encoded = htmlspecialchars(urlencode($publisher_name));
+
     $layout .= "<div class='col' style='width: fit-content'>
                   <div class='card mb-3' style='width: 18rem'>
                     <img src='$image' class='card-img-top' alt=''>
                     <div class='card-body'>
                       <h5 class='card-title mb-2'>$title</h5>
-                      <p class='card-text mb-2'>$author_first_name $author_last_name</p>
                       <p class='card-text mb-2'>$type</p>
-                      <p class='card-text'>$status</p>
+                      <p class='card-text mb-2'>$author_first_name $author_last_name</p>
+                      <a href='./publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name</p></a>
+                      <p class='card-text mb-2'>$status</p>
                       <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
                     </div>
                   </div>
