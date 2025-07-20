@@ -131,7 +131,10 @@ if (isset($_POST['update'])) {
 </head>
 
 <body>
-  <div class="container mt-4">
+  <div class="title-row">
+    <h1 class="text-center">Big Library</h1>
+  </div>
+  <div class="container mt-2">
     <form method="POST">
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="title">Title:</label></div>

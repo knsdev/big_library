@@ -34,14 +34,14 @@ function create_media_card_layout($rows, $showLinkToPublisher)
     $card_text_max_length = 30;
 
     $title = limit_string_length($title, $card_text_max_length);
-    $publisher_name = limit_string_length($publisher_name, $card_text_max_length);
     $author_full_name = limit_string_length($author_first_name . " " . $author_last_name, $card_text_max_length);
 
     $publisher_name_url_encoded = htmlspecialchars(urlencode($publisher_name));
+    $publisher_name_shorter = limit_string_length($publisher_name, $card_text_max_length);
 
     $publisher_html = ($showLinkToPublisher) ?
-      "<a href='./publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name</p></a>"
-      : "<p class='card-text mb-2'>$publisher_name</p>";
+      "<a href='./publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name_shorter</p></a>"
+      : "<p class='card-text mb-2'>$publisher_name_shorter</p>";
 
     $layout .= "<div class='col' style='width: fit-content'>
                   <div class='card mb-3 shadow-sm' style='width: 18rem'>

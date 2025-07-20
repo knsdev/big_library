@@ -33,12 +33,12 @@ if (isset($_GET['id'])) {
         $publish_date = "";
       }
 
-      $layout = "<div class='container col-xxl-8 px-4 pt-3'>
-                   <div class='row flex-lg-row-reverse align-items-center g-5 py-5'>
+      $layout = "<div class='container col-xxl-8 px-4 pt-4'>
+                   <div class='row flex-lg-row-reverse align-items-start g-5 pb-5'>
                      <div class='col-10 col-sm-8 col-lg-6'>
                        <img src='$image' class='d-block mx-lg-auto shadow' alt='' loading='lazy'>
                     </div>
-                    <div class='col-lg-6 rounded-2 p-4'>
+                    <div class='col-lg-6 rounded-2 p-2'>
                       <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>$title</h1>
                       <p class='h5 lh-base'>$short_description</p>
                       <div class='mt-3 mb-4'>
@@ -86,6 +86,9 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+  <div class="title-row mb-0">
+    <h1 class="text-center">Big Library</h1>
+  </div>
   <?= $layout ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>

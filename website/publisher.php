@@ -9,7 +9,6 @@ if (!isset($_GET['publisher_name'])) {
 }
 
 $layout = "";
-$page_title = "";
 
 $publisher_name = $_GET['publisher_name'];
 // var_dump($publisher_name);
@@ -23,7 +22,6 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 // echo '</pre>';
 
 $layout = create_media_card_layout($rows, false);
-$page_title = "Media published by $publisher_name";
 
 ?>
 
@@ -33,15 +31,18 @@ $page_title = "Media published by $publisher_name";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>$page_title</title>
+  <title><?= $publisher_name ?></title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="stylesheet" href="./styles/media_card_layout.css">
 </head>
 
 <body>
+  <div class="title-row mb-3">
+    <h1 class="text-center">Big Library</h1>
+  </div>
   <div class="container">
-    <h1 class="mt-3 mb-4"><?= $page_title ?></h1>
+    <h2 class="mt-3 mb-4"><span class="text-dark-emphasis">Publisher:</span> <span class="text-dark fw-bold"><?= $publisher_name ?></span></h2>
     <?= $layout ?>
     <a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>
   </div>
