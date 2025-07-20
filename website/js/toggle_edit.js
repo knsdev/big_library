@@ -3,13 +3,15 @@ let createButton = document.getElementById("create-button");
 let updateButtons = document.getElementsByClassName("update-button");
 let deleteButtons = document.getElementsByClassName("delete-button");
 
-let localStorageIsEditing = localStorage.getItem("isEditing");
+const localStorageKey = "big_library_is_editing";
+
+let localStorageIsEditing = localStorage.getItem(localStorageKey);
 let isEditing = localStorageIsEditing == null || localStorageIsEditing == "1";
 apply_edit_or_view_mode();
 
 toggleEditButton.addEventListener("click", () => {
   isEditing = !isEditing;
-  localStorage.setItem("isEditing", isEditing ? "1" : "0");
+  localStorage.setItem(localStorageKey, isEditing ? "1" : "0");
   apply_edit_or_view_mode();
 });
 
