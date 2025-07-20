@@ -10,16 +10,16 @@ function insert_new_medium()
   global $input_error_messages;
   global $result_message;
 
-  $title = $_POST['title'];
-  $image = $_POST['image'];
-  $isbn_code = $_POST['isbn_code'];
-  $short_description = $_POST['short_description'];
-  $type = $_POST['type'];
-  $author_first_name = $_POST['author_first_name'];
-  $author_last_name = $_POST['author_last_name'];
-  $publisher_name = $_POST['publisher_name'];
-  $publisher_address = $_POST['publisher_address'];
-  $publish_date = $_POST['publish_date'];
+  $title = htmlspecialchars(trim($_POST['title']));
+  $image = filter_var(trim($_POST['image']), FILTER_SANITIZE_URL);
+  $isbn_code = trim($_POST['isbn_code']);
+  $short_description = htmlspecialchars(trim($_POST['short_description']));
+  $type = htmlspecialchars(trim($_POST['type']));
+  $author_first_name = htmlspecialchars(trim($_POST['author_first_name']));
+  $author_last_name = htmlspecialchars(trim($_POST['author_last_name']));
+  $publisher_name = htmlspecialchars(trim($_POST['publisher_name']));
+  $publisher_address = htmlspecialchars(trim($_POST['publisher_address']));
+  $publish_date = htmlspecialchars(trim($_POST['publish_date']));
   $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
 
   if (empty($title)) {
@@ -52,6 +52,11 @@ function insert_new_medium()
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   $statement = $conn->prepare($sql);
+
+  if (!$statement) {
+    $result_message = "Error: prepare failed!";
+    return;
+  }
 
   $statement->bind_param(
     "ssssssssssi",
@@ -165,23 +170,21 @@ if (isset($_POST['create'])) {
 
       <div class="row mb-3">
         <div class="col-3 col-md-2"></div>
-        <div class="col-8 col-sm-6 col-md-4">
-          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:50%">
+        <div class="col-8 col-sm-6 col-md-4 d-flex gap-3 align-items-start">
+          <input type="submit" value="Create" name="create" class="btn btn-primary" style="width:200px">
+        </div>
+        <div class="col">
+          <div>
+            <?= $input_error_messages ?>
+            <?= $result_message ?>
+          </div>
         </div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <a href="./index.php" class="btn btn-secondary" style="width:50%">Back</a>
-        </div>
-      </div>
-
-      <div class="row mb-2">
-        <div class="col-3 col-md-2"></div>
-        <div class="col-8 col-sm-6 col-md-4">
-          <?= $input_error_messages ?>
-          <?= $result_message ?>
+          <a href="./index.php" class="btn btn-secondary" style="width:200px">Back</a>
         </div>
       </div>
     </form>
