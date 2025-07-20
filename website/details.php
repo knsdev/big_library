@@ -35,10 +35,10 @@ if (isset($_GET['id'])) {
 
       $layout = "<div class='container col-xxl-8 px-4 pt-4'>
                    <div class='row flex-lg-row-reverse align-items-start g-5 pb-5'>
-                     <div class='col-10 col-sm-8 col-lg-6'>
+                     <div class='col-12 col-sm-8 col-lg-6'>
                        <img src='$image' class='d-block mx-lg-auto shadow' alt='' loading='lazy'>
                     </div>
-                    <div class='col-lg-6 rounded-2 p-2'>
+                    <div class='col-lg-6 rounded-2 p-4 p-sm-2 mt-0 mt-sm-3 mt-md-5'>
                       <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>$title</h1>
                       <p class='h5 lh-base'>$short_description</p>
                       <div class='mt-3 mb-4'>
@@ -81,6 +81,12 @@ if (isset($_GET['id'])) {
     img {
       width: 500px;
       height: auto;
+    }
+
+    @media (width < 576px) {
+      img {
+        width: 100%;
+      }
     }
   </style>
 </head>
