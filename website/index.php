@@ -53,8 +53,11 @@ if (isset($_POST['search'])) {
         </div>
       </div>
       <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-        <form role="search" method="POST">
+        <form role="search" method="POST" class="d-flex gap-1">
           <input name="search" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+          <button type="submit" aria-label="Submit" class="btn btn-outline-secondary">
+            <i class="bi bi-search"></i>
+          </button>
         </form>
       </div>
       <div class="col-0 col-sm-0 col-md-1 col-lg-4"></div>
