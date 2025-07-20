@@ -45,14 +45,17 @@ if (isset($_POST['search'])) {
     <h1 class="text-center">Big Library</h1>
   </div>
   <div class="container">
-    <div class="row mb-4 justify-content-between justify-content-md-start">
-      <div class="col-12 col-sm-5 col-md-4 mb-3 mb-sm-0">
+    <div class="row mb-4 justify-content-center justify-content-sm-between">
+      <div class="col-12 col-sm-5 col-md-4 col-lg-4 mb-3 mb-sm-0" id="create-button-parent">
         <a href="./create_medium.php" class="btn btn-primary">Create new Medium</a>
       </div>
-      <div class="col-12 col-sm-6 col-md-4">
+      <div class="col-10 col-sm-5 col-md-6 col-lg-4">
         <form role="search" method="POST">
           <input name="search" type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
+      </div>
+      <div class="col-2 col-sm-2 col-md-2 col-lg-4 d-flex justify-content-end">
+        <button type="button" class="btn" id="toggle-edit">Edit</button>
       </div>
     </div>
     <?= $layout ?>
@@ -63,6 +66,7 @@ if (isset($_POST['search'])) {
     <?php create_js_id_map($rows); ?>
     setup_delete_buttons_to_open_modal(idMap);
   </script>
+  <script src="./js/toggle_edit.js"></script>
 </body>
 
 </html>

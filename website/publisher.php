@@ -42,6 +42,9 @@ $layout = create_media_card_layout($rows, false);
     <h1 class="text-center">Big Library</h1>
   </div>
   <div class="container">
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn" id="toggle-edit">Edit</button>
+    </div>
     <h2 class="mt-3 mb-4"><span class="text-dark-emphasis">Publisher:</span> <span class="text-dark fw-bold"><?= $publisher_name ?></span></h2>
     <?= $layout ?>
     <a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>
@@ -53,6 +56,7 @@ $layout = create_media_card_layout($rows, false);
     <?php create_js_id_map($rows); ?>
     setup_delete_buttons_to_open_modal(idMap);
   </script>
+  <script src="./js/toggle_edit.js"></script>
 </body>
 
 </html>

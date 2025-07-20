@@ -54,7 +54,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
                       <p class='card-text mb-2'>$status</p>
                       <div class='d-flex gap-2 justify-content-start align-items-start'>
                         <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
-                        <a href='./update_medium.php?id=$id' class='btn btn-success'>Update</a>
+                        <a href='./update_medium.php?id=$id' class='update-button btn btn-success'>Update</a>
                         <button type='button' class='delete-button btn btn-danger'>Delete</button>
                       </div>
                     </div>

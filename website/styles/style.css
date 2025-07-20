@@ -14,3 +14,7 @@ body {
     padding: 0.5rem;
   }
 }
+
+.btn-invisible {
+  display: none;
+}
