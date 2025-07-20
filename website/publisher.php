@@ -43,7 +43,7 @@ $layout = create_media_card_layout($rows, false);
   </div>
   <div class="container">
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn" id="toggle-edit">Edit</button>
+      <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
     </div>
     <h2 class="mt-3 mb-4"><span class="text-dark-emphasis">Publisher:</span> <span class="text-dark fw-bold"><?= $publisher_name ?></span></h2>
     <?= $layout ?>

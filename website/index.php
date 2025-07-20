@@ -46,17 +46,18 @@ if (isset($_POST['search'])) {
   </div>
   <div class="container">
     <div class="row mb-4 justify-content-center justify-content-sm-between">
-      <div class="col-12 col-sm-5 col-md-4 col-lg-4 mb-3 mb-sm-0" id="create-button-parent">
-        <a href="./create_medium.php" class="btn btn-primary">Create new Medium</a>
+      <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
+        <div class="d-flex align-items-start gap-3">
+          <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
+          <a href="./create_medium.php" class="btn btn-primary btn-invisible" id="create-button">Create new Medium</a>
+        </div>
       </div>
-      <div class="col-10 col-sm-5 col-md-6 col-lg-4">
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4">
         <form role="search" method="POST">
           <input name="search" type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
       </div>
-      <div class="col-2 col-sm-2 col-md-2 col-lg-4 d-flex justify-content-end">
-        <button type="button" class="btn" id="toggle-edit">Edit</button>
-      </div>
+      <div class="col-0 col-sm-0 col-md-1 col-lg-4"></div>
     </div>
     <?= $layout ?>
   </div>

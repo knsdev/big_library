@@ -1,5 +1,5 @@
 let toggleEditButton = document.getElementById("toggle-edit");
-let createButton = document.getElementById("create-button-parent");
+let createButton = document.getElementById("create-button");
 let updateButtons = document.getElementsByClassName("update-button");
 let deleteButtons = document.getElementsByClassName("delete-button");
 
@@ -35,9 +35,9 @@ function apply_edit_or_view_mode() {
   }
 
   if (isEditing) {
-    toggleEditButton.innerHTML = "Edit Mode";
+    toggleEditButton.innerHTML = `<i class="bi bi-pencil"></i>`;
   } else {
-    toggleEditButton.innerHTML = "View Mode";
+    toggleEditButton.innerHTML = `<i class="bi bi-eye"></i>`;
   }
 
   set_class(toggleEditButton.classList, "btn-outline-primary", isEditing);
