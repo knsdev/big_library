@@ -42,7 +42,7 @@ $layout = create_media_card_layout($rows, false);
     <h1 class="text-center">Big Library</h1>
   </div>
   <div class="container">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-start">
       <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
     </div>
     <h2 class="mt-3 mb-4"><span class="text-dark-emphasis">Publisher:</span> <span class="text-dark fw-bold"><?= $publisher_name ?></span></h2>
