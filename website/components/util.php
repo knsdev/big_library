@@ -1,5 +1,9 @@
 <?php
 
+define("USR_NAME_MIN_LENGTH", 4);
+define("PW_MIN_LENGTH", 5);
+define("PICTURE_FOLDER_NAME", "images");
+
 function clean_input($str)
 {
   $result = trim($str);

@@ -5,10 +5,6 @@ require_once './components/db_connect.php';
 require_once './components/util.php';
 require_once './components/file_upload.php';
 
-define("USR_NAME_MIN_LENGTH", 4);
-define("PW_MIN_LENGTH", 5);
-define("PICTURE_FOLDER_NAME", "images");
-
 if (isset($_SESSION["admin"])) {
   header("location: dashboard.php");
 } else if (isset($_SESSION["user"])) {
