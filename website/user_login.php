@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-echo '<pre>';
-var_dump($_SESSION);
-echo '</pre><br>';
+// echo '<pre>';
+// var_dump($_SESSION);
+// echo '</pre><br>';
 
 require_once './components/db_connect.php';
 require_once './components/util.php';
@@ -19,8 +19,6 @@ if (isset($_POST["login"])) {
   $username_or_email = clean_input($_POST["username_or_email"]);
   $password = hash("sha256", clean_input($_POST["password"]));
 
-  echo '<pre>';
-
   if (filter_var($username_or_email, FILTER_VALIDATE_EMAIL)) {
     $email = $username_or_email;
     $sql = "SELECT * FROM `user` WHERE `email`='$email' AND `password`='$password'";
@@ -32,15 +30,11 @@ if (isset($_POST["login"])) {
   $result = mysqli_query($conn, $sql);
   if (isset($email)) {
     echo 'email: ';
-    var_dump($email);
   }
 
   if (isset($username)) {
     echo 'username: ';
-    var_dump($username);
   }
-
-  var_dump($result);
 
   if ($result) {
     if (mysqli_num_rows($result) == 1) {
@@ -48,13 +42,11 @@ if (isset($_POST["login"])) {
 
       if ($row["authority"] == "admin") {
         $_SESSION["admin"] = $row["id"];
-        header("location: dashboard.php");
+        header("location: admin_dashboard.php");
       } else {
         $_SESSION["user"] = $row["id"];
         header("location: home.php");
       }
-
-      var_dump($_SESSION);
     } else {
       echo "<div class='alert alert-warning' role='alert'>
               Wrong credentials!
@@ -62,8 +54,6 @@ if (isset($_POST["login"])) {
     }
   } else {
   }
-
-  echo '</pre>';
 }
 
 ?>

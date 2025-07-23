@@ -7,4 +7,4 @@ unset($_SESSION["user"]);
 session_unset();
 session_destroy();
 
-header("location: login.php");
+header("location: user_login.php");

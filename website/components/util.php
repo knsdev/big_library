@@ -36,7 +36,7 @@ function renderNavbar($profile_img_src)
             <li>
               <hr class='dropdown-divider'>
             </li>
-            <li><a class='dropdown-item' href='./logout.php'>Sign out</a></li>
+            <li><a class='dropdown-item' href='./user_logout.php'>Sign out</a></li>
           </ul>
         </div>
       </div>

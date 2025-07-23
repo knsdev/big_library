@@ -6,7 +6,7 @@ require_once './components/util.php';
 require_once './components/file_upload.php';
 
 if (isset($_SESSION["admin"])) {
-  header("location: dashboard.php");
+  header("location: admin_dashboard.php");
 } else if (isset($_SESSION["user"])) {
   header("location: home.php");
 }
@@ -54,7 +54,7 @@ if (isset($_POST['register'])) {
     $error = true;
     $error_email = "Email format is invalid.";
   } else {
-    $sql = "SELECT * FROM `user` WHERE `id`='$email'";
+    $sql = "SELECT * FROM `user` WHERE `email`='$email'";
     $result = mysqli_query($conn, $sql);
     if (!$result) die("query failed");
 
@@ -66,11 +66,11 @@ if (isset($_POST['register'])) {
 
   if ($picture[1] != ImageFileUploadResult::Success && $picture[1] != ImageFileUploadResult::NoFileUploaded) {
     $error = true;
-    $picture_error = $picture[1];
+    $picture_error = image_file_get_error_message($picture[1]);
   }
 
   if ($error) {
-    imageFileDelete($picture, PICTURE_FOLDER_NAME);
+    image_file_delete($picture, PICTURE_FOLDER_NAME);
   } else {
     $password = hash("sha256", $password);
 
@@ -82,7 +82,7 @@ if (isset($_POST['register'])) {
     if ($result) {
       echo 'Registered successfully!<br><br>';
     } else {
-      imageFileDelete($picture, PICTURE_FOLDER_NAME);
+      image_file_delete($picture, PICTURE_FOLDER_NAME);
     }
   }
 }

@@ -1,11 +1,11 @@
 <?php
 
-$hostname = "localhost";
-$username = "root";
-$password = null;
-$databaseName = "be25_exam4_kimschlueter_biglibrary";
+$dbHostname = "localhost";
+$dbUsername = "root";
+$dbPassword = null;
+$dbName = "be25_exam4_kimschlueter_biglibrary";
 
-$conn = new mysqli($hostname, $username, $password, $databaseName);
+$conn = new mysqli($dbHostname, $dbUsername, $dbPassword, $dbName);
 
 if (!$conn) {
   die("Database connection failed!");

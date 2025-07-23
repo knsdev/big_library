@@ -51,9 +51,24 @@ function image_file_upload($param, $folderName)
   }
 }
 
-function imageFileDelete($img, $folderName)
+function image_file_delete($img, $folderName)
 {
   if ($img[0]) {
     unlink($folderName . '/' . $img[0]);
+  }
+}
+
+function image_file_get_error_message($result)
+{
+  switch ($result) {
+    case ImageFileUploadResult::Success:
+      return "";
+    case ImageFileUploadResult::InvalidFile:
+      return "Error: Invalid File Type";
+    case ImageFileUploadResult::NoFileUploaded:
+      return "You have not uploaded a picture. You can add one later.";
+    case ImageFileUploadResult::UnknownError:
+    default:
+      return "Something went wrong, please try again later.";
   }
 }
