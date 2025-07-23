@@ -1,5 +1,5 @@
 <?php
-require_once './modal.php';
+require_once __DIR__ . '/modal.php';
 
 function limit_string_length($input_string, $max_length)
 {
