@@ -1,7 +1,7 @@
 <?php
 require_once './components/db_connect.php';
-require_once './media_card_layout.php';
-require_once './modal.php';
+require_once './components/media_card_layout.php';
+require_once './components/modal.php';
 
 if (!isset($_GET['publisher_name'])) {
   echo $error_msg_general;

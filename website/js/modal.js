@@ -9,7 +9,7 @@ function setup_delete_buttons_to_open_modal(idMap) {
       let modal = document.getElementById("mainModal");
 
       modalDeleteBtn = modal.getElementsByClassName("modal-delete-button")[0];
-      modalDeleteBtn.setAttribute("href", `./delete_medium.php?id=${id}`);
+      modalDeleteBtn.setAttribute("href", `./medium_delete.php?id=${id}`);
 
       let titleElement = document.getElementById("mainModalLabel");
       titleElement.innerHTML = "Delete?";

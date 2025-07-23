@@ -40,7 +40,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
     $publisher_name_shorter = limit_string_length($publisher_name, $card_text_max_length);
 
     $publisher_html = ($showLinkToPublisher) ?
-      "<a href='./publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name_shorter</p></a>"
+      "<a href='../publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name_shorter</p></a>"
       : "<p class='card-text mb-2'>$publisher_name_shorter</p>";
 
     $layout .= "<div class='col' style='width: fit-content'>
@@ -53,8 +53,8 @@ function create_media_card_layout($rows, $showLinkToPublisher)
                       $publisher_html
                       <p class='card-text mb-2'>$status</p>
                       <div class='d-flex gap-2 justify-content-start align-items-start'>
-                        <a href='./details.php?id=$id' class='btn btn-primary'>Details</a>
-                        <a href='./update_medium.php?id=$id' class='update-button btn-invisible btn btn-success'>Update</a>
+                        <a href='./medium_details.php?id=$id' class='btn btn-primary'>Details</a>
+                        <a href='./medium_update.php?id=$id' class='update-button btn-invisible btn btn-success'>Update</a>
                         <button type='button' class='delete-button btn-invisible btn btn-danger'>Delete</button>
                       </div>
                     </div>

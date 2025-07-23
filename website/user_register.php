@@ -137,7 +137,7 @@ if (isset($_POST['register'])) {
       <input type="submit" value="Register" name="register" class="btn btn-primary mt-3">
     </form>
     <div class="mt-5">
-      <a href="login.php">Back</a>
+      <a href="user_login.php">Back</a>
     </div>
   </div>
 

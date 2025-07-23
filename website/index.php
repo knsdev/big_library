@@ -49,7 +49,7 @@ if (isset($_POST['search'])) {
       <div class="col-12 col-sm-6 col-md-5 col-lg-4 mb-3 mb-sm-0">
         <div class="d-flex align-items-start gap-3">
           <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
-          <a href="./create_medium.php" class="btn btn-primary btn-invisible" id="create-button">Create new Medium</a>
+          <a href="./medium_create.php" class="btn btn-primary btn-invisible" id="create-button">Create new Medium</a>
         </div>
       </div>
       <div class="col-12 col-sm-6 col-md-6 col-lg-4">

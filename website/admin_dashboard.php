@@ -55,7 +55,7 @@ if ($result) {
       }
     }
 
-    $layout .= "<td><a href='./admin_update_user.php?id=$current_user_id'><i class='bi bi-pencil'></i></a></td>";
+    $layout .= "<td><a href='./user_update.php?id=$current_user_id'><i class='bi bi-pencil'></i></a></td>";
     $layout .= "</tr>";
   }
 
