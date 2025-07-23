@@ -1,5 +1,5 @@
 <?php
-require_once './db_connect.php';
+require_once './components/db_connect.php';
 require_once './media_card_layout.php';
 require_once './modal.php';
 
@@ -11,15 +11,10 @@ if (!isset($_GET['publisher_name'])) {
 $layout = "";
 
 $publisher_name = $_GET['publisher_name'];
-// var_dump($publisher_name);
 
 $sql = "SELECT * FROM `medium` WHERE `publisher_name`='$publisher_name'";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-// echo '<pre>';
-// var_dump($rows);
-// echo '</pre>';
 
 $layout = create_media_card_layout($rows, false);
 

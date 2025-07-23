@@ -1,6 +1,6 @@
 <?php
-require_once './db_connect.php';
-require_once './media_card_layout.php';
+require_once './components/db_connect.php';
+require_once './components/media_card_layout.php';
 
 $layout = "";
 $sql = "SELECT * FROM `medium`";
