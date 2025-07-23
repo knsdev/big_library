@@ -56,6 +56,10 @@ function getUserData($conn, $user_id)
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
+    if (mysqli_num_rows($result) != 1) {
+      return [null, null];
+    }
+
     $row = mysqli_fetch_assoc($result);
 
     if (empty($row['picture'])) {
@@ -64,7 +68,7 @@ function getUserData($conn, $user_id)
       $my_profile_img_src = './images/' . $row['picture'];
     }
   } else {
-    return null;
+    return [null, null];
   }
 
   return [$row, $my_profile_img_src];
