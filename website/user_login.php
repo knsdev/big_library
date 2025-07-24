@@ -12,7 +12,7 @@ require_once './components/util.php';
 if (isset($_SESSION["admin"])) {
   header("location: dashboard.php");
 } else if (isset($_SESSION["user"])) {
-  header("location: home.php");
+  header("location: index.php");
 }
 
 if (isset($_POST["login"])) {
@@ -45,7 +45,7 @@ if (isset($_POST["login"])) {
         header("location: admin_dashboard.php");
       } else {
         $_SESSION["user"] = $row["id"];
-        header("location: home.php");
+        header("location: index.php");
       }
     } else {
       echo "<div class='alert alert-warning' role='alert'>

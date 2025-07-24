@@ -8,7 +8,7 @@ require_once './components/file_upload.php';
 if (isset($_SESSION["admin"])) {
   header("location: admin_dashboard.php");
 } else if (isset($_SESSION["user"])) {
-  header("location: home.php");
+  header("location: index.php");
 }
 
 if (isset($_POST['register'])) {

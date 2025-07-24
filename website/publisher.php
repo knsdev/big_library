@@ -51,7 +51,6 @@ $layout = create_media_card_layout($rows, false);
     <?php create_js_id_map($rows); ?>
     setup_delete_buttons_to_open_modal(idMap);
   </script>
-  <script src="./js/toggle_edit.js"></script>
 </body>
 
 </html>

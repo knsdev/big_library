@@ -161,7 +161,7 @@ if (isset($_POST['update'])) {
         <input type="submit" value="Update" name="update" class="btn btn-primary mt-3">
       </form>
       <div class="mt-5">
-        <a href="<?= $isAdmin ? "admin_dashboard.php" : "home.php" ?>">Back</a>
+        <a href="<?= $isAdmin ? "admin_dashboard.php" : "index.php" ?>">Back</a>
       </div>
     </div>
   </main>
