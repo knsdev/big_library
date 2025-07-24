@@ -28,13 +28,6 @@ if (isset($_POST["login"])) {
   }
 
   $result = mysqli_query($conn, $sql);
-  if (isset($email)) {
-    echo 'email: ';
-  }
-
-  if (isset($username)) {
-    echo 'username: ';
-  }
 
   if ($result) {
     if (mysqli_num_rows($result) == 1) {
@@ -53,6 +46,7 @@ if (isset($_POST["login"])) {
             </div>";
     }
   } else {
+    echo $error_msg_general;
   }
 }
 
@@ -70,6 +64,8 @@ if (isset($_POST["login"])) {
 </head>
 
 <body>
+  <?php require_once './components/navbar.php'; ?>
+
   <div class="container">
     <form method="POST" class="mt-4 mb-3 d-flex flex-column justify-content-start align-items-start">
       <div>
@@ -86,6 +82,7 @@ if (isset($_POST["login"])) {
         </div>
       </div>
     </form>
+
     <a href="./user_register.php">Register new Account</a>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>

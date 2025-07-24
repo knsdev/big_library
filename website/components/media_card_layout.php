@@ -40,7 +40,7 @@ function create_media_card_layout($rows, $showLinkToPublisher)
     $publisher_name_shorter = limit_string_length($publisher_name, $card_text_max_length);
 
     $publisher_html = ($showLinkToPublisher) ?
-      "<a href='../publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name_shorter</p></a>"
+      "<a href='publisher.php?publisher_name=$publisher_name_url_encoded'><p class='card-text mb-2'>$publisher_name_shorter</p></a>"
       : "<p class='card-text mb-2'>$publisher_name_shorter</p>";
 
     $editButtons = (isset($_SESSION['admin'])) ? "<a href='./medium_update.php?id=$id' class='update-button btn-invisible btn btn-success'>Update</a>

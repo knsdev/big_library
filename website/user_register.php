@@ -101,6 +101,8 @@ if (isset($_POST['register'])) {
 </head>
 
 <body>
+  <?php require_once './components/navbar.php'; ?>
+
   <div class="container">
     <form method="POST" enctype="multipart/form-data" class="mt-3" style="max-width: 500px;">
       <div class="mb-3">

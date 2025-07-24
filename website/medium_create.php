@@ -1,5 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["admin"])) {
+  header("location: user_login.php");
+}
+
 require_once './components/db_connect.php';
+require_once './components/util.php';
+
+$my_user_id = getMyUserIdFromSession();
+list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
 
 $input_error_messages = "";
 $result_message = "";
@@ -101,9 +111,8 @@ if (isset($_POST['create'])) {
 </head>
 
 <body>
-  <div class="title-row">
-    <h1 class="text-center">Big Library</h1>
-  </div>
+  <?php require_once './components/navbar.php'; ?>
+
   <div class="container mt-2">
     <form method="POST">
       <div class="row mb-2">

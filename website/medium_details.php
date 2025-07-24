@@ -1,5 +1,16 @@
 <?php
+session_start();
+
+// Not logged in, go back to login page
+if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
+  header("location: user_login.php");
+}
+
 require_once './components/db_connect.php';
+require_once './components/util.php';
+
+$my_user_id = getMyUserIdFromSession();
+list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
 
 $layout = "";
 
@@ -36,7 +47,7 @@ if (isset($_GET['id'])) {
       $layout = "<div class='container col-xxl-8 px-4 pt-4'>
                    <div class='row flex-lg-row-reverse align-items-start g-5 pb-5'>
                      <div class='col-12 col-sm-8 col-lg-6'>
-                       <img src='$image' class='d-block mx-lg-auto shadow' alt='' loading='lazy'>
+                       <img src='$image' class='d-block mx-lg-auto shadow medium-details-img' alt='' loading='lazy'>
                     </div>
                     <div class='col-lg-6 rounded-2 p-4 p-sm-2 mt-0 mt-sm-3 mt-md-5'>
                       <h1 class='display-5 fw-bold text-body-emphasis lh-1 mb-3'>$title</h1>
@@ -78,13 +89,13 @@ if (isset($_GET['id'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="./styles/style.css">
   <style>
-    img {
+    .medium-details-img {
       width: 500px;
       height: auto;
     }
 
     @media (width < 576px) {
-      img {
+      .medium-details-img {
         width: 100%;
       }
     }
@@ -92,9 +103,7 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
-  <div class="title-row mb-0">
-    <h1 class="text-center">Big Library</h1>
-  </div>
+  <?php require_once './components/navbar.php'; ?>
   <?= $layout ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
