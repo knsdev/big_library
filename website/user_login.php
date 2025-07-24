@@ -66,11 +66,12 @@ if (isset($_POST["login"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
   <div class="container">
-    <form method="POST" class="mt-4 d-flex flex-column justify-content-start align-items-start">
+    <form method="POST" class="mt-4 mb-3 d-flex flex-column justify-content-start align-items-start">
       <div>
         <div class="d-flex mb-3">
           <label for="username_or_email" class="form-label" style="flex-basis: 250px">Username/Email:</label>

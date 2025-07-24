@@ -17,12 +17,15 @@ $my_user_id = getMyUserIdFromSession();
 list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
 
 // Get User Id
-if ($isAdmin && isset($_GET["id"])) {
-  $user_id = $_GET["id"];
+if ($isAdmin) {
+  if (isset($_GET["id"]))
+    $user_id = $_GET["id"];
+  else
+    $user_id = getMyUserIdFromSession();
 } else if ($isUser) {
   $user_id = getMyUserIdFromSession();
 } else {
-  die("No user id specified!");
+  header("location: user_login.php");
 }
 
 list($user_data, $profile_img_src) = getUserData($conn, $user_id);
@@ -122,6 +125,7 @@ if (isset($_POST['update'])) {
   <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
