@@ -13,6 +13,9 @@ if (!$isAdmin && !$isUser) {
   header("location: user_login.php");
 }
 
+$my_user_id = getMyUserIdFromSession();
+list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
+
 // Get User Id
 if ($isAdmin && isset($_GET["id"])) {
   $user_id = $_GET["id"];
@@ -123,7 +126,7 @@ if (isset($_POST['update'])) {
 
 <body>
   <?php
-  renderNavbar($profile_img_src);
+  require_once './components/navbar.php';
   ?>
   <main>
     <div class="container">

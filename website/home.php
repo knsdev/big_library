@@ -26,7 +26,7 @@ list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
 
 <body>
   <?php
-  renderNavbar($my_profile_img_src);
+  require_once './components/navbar.php';
   ?>
   <main>
     <div class="container">
