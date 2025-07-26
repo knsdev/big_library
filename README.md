@@ -1,6 +1,6 @@
 # Big Library
 
-A web app built with PHP and MySQL that lets users manage media (Books, DVDs, CDs).
+A web app built with PHP and MySQL that lets users manage media (books, DVDs, CDs).
 
 ## Features
 
