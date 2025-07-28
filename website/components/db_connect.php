@@ -3,7 +3,7 @@
 $dbHostname = "localhost";
 $dbUsername = "root";
 $dbPassword = null;
-$dbName = "be25_exam4_kimschlueter_biglibrary";
+$dbName = "big_library";
 
 $conn = new mysqli($dbHostname, $dbUsername, $dbPassword, $dbName);
 

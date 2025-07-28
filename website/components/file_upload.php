@@ -18,10 +18,6 @@ enum ImageFileUploadResult
  */
 function image_file_upload($param, $folderName)
 {
-  // echo '<pre>';
-  // var_dump($param);
-  // echo '</pre>';
-
   $upload_error = $param['error'];
   $original_name = $param['name'];
   $tmp_name = $param['tmp_name'];
