@@ -1,6 +1,6 @@
 # Big Library
 
-A web app built with PHP and MySQL that lets users manage media (Books, DVDs, CDs).
+A web app built with PHP and MySQL that lets users manage media (books, DVDs, CDs).
 
 ## Features
 
@@ -10,15 +10,14 @@ A web app built with PHP and MySQL that lets users manage media (Books, DVDs, CD
 - Simple, clean interface using Bootstrap
 - Delete confirm modal
 
-Setup
+## Setup
 
-    Install XAMPP
+1. Install XAMPP
+2. Copy the website folder into the htdocs directory
+3. Open phpMyAdmin and import the big_library.sql file
+4. Visit http://localhost/website in your browser
 
-    Copy the website folder into the htdocs directory
-
-    Open phpMyAdmin and import the big_library.sql file
-
-    Visit http://localhost/website in your browser
+## Screenshots
 
 <table>
   <tr>
