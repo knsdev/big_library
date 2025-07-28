@@ -60,7 +60,7 @@ if (isset($_POST['update'])) {
   $author_last_name = clean_input($_POST['author_last_name']);
   $publisher_name = clean_input($_POST['publisher_name']);
   $publisher_address = clean_input($_POST['publisher_address']);
-  $publish_date = clean_input($_POST['publish_date']);
+  $publish_date = date_format_for_database(clean_input($_POST['publish_date']));
   $status = (int) filter_var(clean_input($_POST['status']), FILTER_VALIDATE_BOOLEAN);
 
   if (empty($title)) {
@@ -164,7 +164,7 @@ if (isset($_POST['update'])) {
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $publish_date ?>" type="text" name="publish_date" id="publish_date" placeholder="YYYY-MM-DD" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $publish_date ?>" type="date" name="publish_date" id="publish_date" placeholder="YYYY-MM-DD" class="form-control"></div>
       </div>
 
       <div class="row mb-4">

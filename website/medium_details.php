@@ -37,12 +37,7 @@ if (isset($_GET['id'])) {
       $publish_date = $row['publish_date'];
       $status = ($row['status']) ? "Available" : "Reserved";
 
-      if (!empty($publish_date) && $publish_date != "0000-00-00") {
-        $publish_date_obj = date_create($publish_date);
-        $publish_date = date_format($publish_date_obj, "F j, Y");
-      } else {
-        $publish_date = "";
-      }
+      $publish_date = date_format_for_display($publish_date);
 
       $layout = "<div class='container col-xxl-8 px-4 pt-4'>
                    <div class='row flex-lg-row-reverse align-items-start g-5 pb-5'>

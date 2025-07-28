@@ -40,3 +40,33 @@ function getUserData($conn, $user_id)
 
   return [$row, $my_profile_img_src];
 }
+
+function date_format_for_database($dateVal)
+{
+  $default_date_value = "1970-01-01";
+
+  if (empty($dateVal) || $dateVal == "0000-00-00") {
+    return $default_date_value;
+  }
+
+  $dateValObj = date_create($dateVal);
+
+  if (!$dateValObj)
+    return $default_date_value;
+
+  return date_format($dateValObj, "Y-m-d");
+}
+
+function date_format_for_display($dateVal)
+{
+  if (!empty($dateVal) && $dateVal != "0000-00-00") {
+    $dateValObj = date_create($dateVal);
+
+    if (!$dateValObj)
+      return "";
+
+    return date_format($dateValObj, "F j, Y");
+  }
+
+  return "";
+}

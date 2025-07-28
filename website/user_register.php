@@ -17,7 +17,7 @@ if (isset($_POST['register'])) {
   $email = clean_input($_POST['email']);
   $first_name = clean_input($_POST['first_name']);
   $last_name = clean_input($_POST['last_name']);
-  $date_of_birth = clean_input($_POST['date_of_birth']);
+  $date_of_birth = date_format_for_database(clean_input($_POST['date_of_birth']));
   $picture = image_file_upload($_FILES['picture'], PICTURE_FOLDER_NAME);
 
   $error = false;
