@@ -13,24 +13,20 @@ list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
 
 $input_error_messages = "";
 $result_message = "";
+$status = 1;
 
-function insert_new_medium()
-{
-  global $conn;
-  global $input_error_messages;
-  global $result_message;
-
-  $title = htmlspecialchars(trim($_POST['title']));
-  $image = filter_var(trim($_POST['image']), FILTER_SANITIZE_URL);
-  $isbn_code = trim($_POST['isbn_code']);
-  $short_description = htmlspecialchars(trim($_POST['short_description']));
-  $type = htmlspecialchars(trim($_POST['type']));
-  $author_first_name = htmlspecialchars(trim($_POST['author_first_name']));
-  $author_last_name = htmlspecialchars(trim($_POST['author_last_name']));
-  $publisher_name = htmlspecialchars(trim($_POST['publisher_name']));
-  $publisher_address = htmlspecialchars(trim($_POST['publisher_address']));
-  $publish_date = htmlspecialchars(trim($_POST['publish_date']));
-  $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
+if (isset($_POST['create'])) {
+  $title = clean_input($_POST['title']);
+  $image = filter_var(clean_input($_POST['image']), FILTER_SANITIZE_URL);
+  $isbn_code = clean_input($_POST['isbn_code']);
+  $short_description = clean_input($_POST['short_description']);
+  $type = clean_input($_POST['type']);
+  $author_first_name = clean_input($_POST['author_first_name']);
+  $author_last_name = clean_input($_POST['author_last_name']);
+  $publisher_name = clean_input($_POST['publisher_name']);
+  $publisher_address = clean_input($_POST['publisher_address']);
+  $publish_date = clean_input($_POST['publish_date']);
+  $status = (int) filter_var(clean_input($_POST['status']), FILTER_VALIDATE_BOOLEAN);
 
   if (empty($title)) {
     $input_error_messages .= 'Title is not allowed to be empty!<br />';
@@ -40,14 +36,8 @@ function insert_new_medium()
     $input_error_messages .= 'Type is not allowed to be empty!<br />';
   }
 
-  if ($input_error_messages)
-    return;
-
-  // echo '<pre>';
-  // var_dump($_POST);
-  // echo '</pre>';
-
-  $sql = "INSERT INTO `medium`(
+  if (empty($input_error_messages)) {
+    $sql = "INSERT INTO `medium`(
     `title`,
     `image`,
     `isbn_code`,
@@ -59,42 +49,40 @@ function insert_new_medium()
     `publisher_address`,
     `publish_date`,
     `status`)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    VALUES (
+      '$title',
+      '$image',
+      '$isbn_code',
+      '$short_description',
+      '$type',
+      '$author_first_name',
+      '$author_last_name',
+      '$publisher_name',
+      '$publisher_address',
+      '$publish_date',
+       $status)";
 
-  $statement = $conn->prepare($sql);
+    $result = mysqli_query($conn, $sql);
 
-  if (!$statement) {
-    $result_message = "Error: prepare failed!";
-    return;
+    if ($result) {
+      $result_message = "New medium created successfully";
+      $title = null;
+      $image = null;
+      $isbn_code = null;
+      $short_description = null;
+      $type = null;
+      $author_first_name = null;
+      $author_last_name = null;
+      $publisher_name = null;
+      $publisher_address = null;
+      $publish_date = null;
+      $status = 1;
+    } else {
+      $result_message = $error_msg_general;
+    }
+
+    $conn->close();
   }
-
-  $statement->bind_param(
-    "ssssssssssi",
-    $title,
-    $image,
-    $isbn_code,
-    $short_description,
-    $type,
-    $author_first_name,
-    $author_last_name,
-    $publisher_name,
-    $publisher_address,
-    $publish_date,
-    $status
-  );
-
-  if ($statement->execute()) {
-    $result_message = "New medium created successfully";
-  } else {
-    $result_message = "Error: " . $statement->error;
-  }
-
-  $statement->close();
-}
-
-if (isset($_POST['create'])) {
-  insert_new_medium();
-  $conn->close();
 }
 
 ?>
@@ -117,62 +105,62 @@ if (isset($_POST['create'])) {
     <form method="POST">
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="title">Title:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="title" id="title" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="title" id="title" value="<?= $title ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="image">Image:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="image" id="image" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="image" id="image" value="<?= $image ?? "" ?>" class=" form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="isbn_code">ISBN:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="isbn_code" id="isbn_code" value="<?= $isbn_code ?? "" ?>" class=" form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="short_description">Short Description:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"></textarea>
+          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class=" form-control"><?= $short_description ?? "" ?></textarea>
         </div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="type">Type:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="type" id="type" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="type" id="type" value="<?= $type ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_first_name">Author First Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_first_name" id="author_first_name" value="<?= $author_first_name ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_last_name">Author Last Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="author_last_name" id="author_last_name" value="<?= $author_last_name ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_name">Publisher Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_name" id="publisher_name" value="<?= $publisher_name ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_address">Publisher Address:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publisher_address" id="publisher_address" value="<?= $publisher_address ?? "" ?>" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input type="text" name="publish_date" id="publish_date" value="<?= $publish_date ?? "" ?>" placeholder="YYYY-MM-DD" class="form-control"></div>
       </div>
 
       <div class="row mb-4">
         <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
           <select name="status" id="status" class="form-select">
-            <option value="1">Available</option>
-            <option value="0">Reserved</option>
+            <option value="1" <?= ($status != 0) ? 'selected' : '' ?>>Available</option>
+            <option value="0" <?= ($status == 0) ? 'selected' : '' ?>>Reserved</option>
           </select>
         </div>
       </div>
