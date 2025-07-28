@@ -14,7 +14,13 @@ function clean_input($str)
 
 function getMyUserIdFromSession()
 {
-  return isset($_SESSION["user"]) ? $_SESSION["user"] : $_SESSION["admin"];
+  if (isset($_SESSION["user"])) {
+    return $_SESSION["user"];
+  } else if (isset($_SESSION["admin"])) {
+    return $_SESSION["admin"];
+  } else {
+    return null;
+  }
 }
 
 function getUserData($conn, $user_id)

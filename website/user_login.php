@@ -40,6 +40,9 @@ if (isset($_POST["login"])) {
         $_SESSION["user"] = $row["id"];
         header("location: index.php");
       }
+
+      $my_user_id = getMyUserIdFromSession();
+      list($my_user_data, $my_profile_img_src) = getUserData($conn, $my_user_id);
     } else {
       echo "<div class='alert alert-warning' role='alert'>
               Wrong credentials!
