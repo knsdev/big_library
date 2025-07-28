@@ -47,9 +47,11 @@ $layout = create_media_card_layout($rows, false);
   <?php require_once './components/navbar.php'; ?>
 
   <div class="container">
-    <div class="d-flex justify-content-start">
-      <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
-    </div>
+    <?php if (isset($_SESSION['admin'])) { ?>
+      <div class="d-flex justify-content-start">
+        <button type="button" class="btn" id="toggle-edit"><i class="bi bi-eye"></i></button>
+      </div>
+    <?php } ?>
     <h2 class="mt-3 mb-4"><span class="text-dark-emphasis">Publisher:</span> <span class="text-dark fw-bold"><?= $publisher_name ?></span></h2>
     <?= $layout ?>
     <a href='./index.php' class='btn btn-secondary btn-md px-4'>Back</a>
