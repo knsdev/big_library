@@ -134,7 +134,7 @@ if (isset($_POST['register'])) {
       </div>
       <div class="mb-3">
         <label for="picture" class="form-label">Picture</label>
-        <input type="file" name="picture" id="picture" class="form-control" value="<?= $picture ?? "" ?>">
+        <input type="file" name="picture" id="picture" class="form-control">
         <p class="text-danger"><?= $picture_error ?? "" ?></p>
       </div>
       <input type="submit" value="Register" name="register" class="btn btn-primary mt-3">

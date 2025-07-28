@@ -2,10 +2,28 @@
 
 enum ImageFileUploadResult
 {
-  case NoFileUploaded;
-  case UnknownError;
-  case InvalidFile;
   case Success;
+  case NoFileUploaded;
+  case InvalidFile;
+  case TooLarge;
+  case UnknownError;
+}
+
+function image_file_get_error_message($result)
+{
+  switch ($result) {
+    case ImageFileUploadResult::Success:
+      return "";
+    case ImageFileUploadResult::NoFileUploaded:
+      return "You have not uploaded a picture. You can add one later.";
+    case ImageFileUploadResult::InvalidFile:
+      return "The file type of your picture is not supported.";
+    case ImageFileUploadResult::TooLarge:
+      return "Your picture file is too large.";
+    case ImageFileUploadResult::UnknownError:
+    default:
+      return "Something went wrong, please try again later.";
+  }
 }
 
 /**
@@ -18,13 +36,19 @@ enum ImageFileUploadResult
  */
 function image_file_upload($param, $folderName)
 {
+  // echo '<pre>';
+  // var_dump($param);
+  // echo '</pre><br><br>';
+
   $upload_error = $param['error'];
   $original_name = $param['name'];
   $tmp_name = $param['tmp_name'];
 
-  if ($upload_error == 4) {
+  if ($upload_error == UPLOAD_ERR_NO_FILE) {
     return [null, ImageFileUploadResult::NoFileUploaded];
-  } else if ($upload_error != 0) {
+  } else if ($upload_error == UPLOAD_ERR_INI_SIZE || $upload_error == UPLOAD_ERR_FORM_SIZE) {
+    return [null, ImageFileUploadResult::TooLarge];
+  } else if ($upload_error != UPLOAD_ERR_OK) {
     return [null, ImageFileUploadResult::UnknownError];
   } else {
     if (!getimagesize($tmp_name)) {
@@ -51,20 +75,5 @@ function image_file_delete($img, $folderName)
 {
   if ($img[0]) {
     unlink($folderName . '/' . $img[0]);
-  }
-}
-
-function image_file_get_error_message($result)
-{
-  switch ($result) {
-    case ImageFileUploadResult::Success:
-      return "";
-    case ImageFileUploadResult::InvalidFile:
-      return "Error: Invalid File Type";
-    case ImageFileUploadResult::NoFileUploaded:
-      return "You have not uploaded a picture. You can add one later.";
-    case ImageFileUploadResult::UnknownError:
-    default:
-      return "Something went wrong, please try again later.";
   }
 }
