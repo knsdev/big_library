@@ -1,5 +1,6 @@
 <?php
 require_once './db_connect.php';
+require_once './util.php';
 
 $input_error_messages = "";
 $result_message = "";
@@ -27,25 +28,31 @@ if (isset($_GET['id'])) {
   exit($error_msg_general);
 }
 
-function update_medium()
-{
-  global $conn;
-  global $input_error_messages;
-  global $result_message;
-  global $id;
-  global $row;
+$title = $row['title'];
+$image = $row['image'];
+$isbn_code = $row['isbn_code'];
+$short_description = $row['short_description'];
+$type = $row['type'];
+$author_first_name = $row['author_first_name'];
+$author_last_name = $row['author_last_name'];
+$publisher_name = $row['publisher_name'];
+$publisher_address = $row['publisher_address'];
+$publish_date = $row['publish_date'];
+$status = $row['status'];
 
-  $title = htmlspecialchars(trim($_POST['title']));
-  $image = filter_var(trim($_POST['image']), FILTER_SANITIZE_URL);
-  $isbn_code = trim($_POST['isbn_code']);
-  $short_description = htmlspecialchars(trim($_POST['short_description']));
-  $type = htmlspecialchars(trim($_POST['type']));
-  $author_first_name = htmlspecialchars(trim($_POST['author_first_name']));
-  $author_last_name = htmlspecialchars(trim($_POST['author_last_name']));
-  $publisher_name = htmlspecialchars(trim($_POST['publisher_name']));
-  $publisher_address = htmlspecialchars(trim($_POST['publisher_address']));
-  $publish_date = htmlspecialchars(trim($_POST['publish_date']));
-  $status = (int) filter_var($_POST['status'], FILTER_VALIDATE_BOOLEAN);
+// Handle POST request 'update'
+if (isset($_POST['update'])) {
+  $title = cleanInput($_POST['title']);
+  $image = filter_var(cleanInput($_POST['image']), FILTER_SANITIZE_URL);
+  $isbn_code = cleanInput($_POST['isbn_code']);
+  $short_description = cleanInput($_POST['short_description']);
+  $type = cleanInput($_POST['type']);
+  $author_first_name = cleanInput($_POST['author_first_name']);
+  $author_last_name = cleanInput($_POST['author_last_name']);
+  $publisher_name = cleanInput($_POST['publisher_name']);
+  $publisher_address = cleanInput($_POST['publisher_address']);
+  $publish_date = cleanInput($_POST['publish_date']);
+  $status = (int) filter_var(cleanInput($_POST['status']), FILTER_VALIDATE_BOOLEAN);
 
   if (empty($title)) {
     $input_error_messages .= 'Title is not allowed to be empty!<br />';
@@ -55,70 +62,29 @@ function update_medium()
     $input_error_messages .= 'Type is not allowed to be empty!<br />';
   }
 
-  if ($input_error_messages) {
-    return;
-  }
-
-  $sql = "UPDATE `medium` SET
-    `title` = ?,
-    `image` = ?,
-    `isbn_code` = ?,
-    `short_description` = ?,
-    `type` = ?,
-    `author_first_name` = ?,
-    `author_last_name` = ?,
-    `publisher_name` = ?,
-    `publisher_address` = ?,
-    `publish_date` = ?,
-    `status` = ?
+  if (empty($input_error_messages)) {
+    $sql = "UPDATE `medium` SET
+    `title` = '$title',
+    `image` = '$image',
+    `isbn_code` = '$isbn_code',
+    `short_description` = '$short_description',
+    `type` = '$type',
+    `author_first_name` = '$author_first_name',
+    `author_last_name` = '$author_last_name',
+    `publisher_name` = '$publisher_name',
+    `publisher_address` = '$publisher_address',
+    `publish_date` = '$publish_date',
+    `status` = $status
     WHERE `id` = $id";
 
-  $statement = $conn->prepare($sql);
+    $result = mysqli_query($conn, $sql);
 
-  if (!$statement) {
-    $result_message = "Error: prepare failed!";
-    return;
+    if ($result) {
+      $result_message = "Medium updated successfully!";
+    } else {
+      $result_message = $error_msg_general;
+    }
   }
-
-  $statement->bind_param(
-    "ssssssssssi",
-    $title,
-    $image,
-    $isbn_code,
-    $short_description,
-    $type,
-    $author_first_name,
-    $author_last_name,
-    $publisher_name,
-    $publisher_address,
-    $publish_date,
-    $status
-  );
-
-  if ($statement->execute()) {
-    $result_message = "Medium updated successfully!";
-
-    $row['title'] = $title;
-    $row['image'] = $image;
-    $row['isbn_code'] = $isbn_code;
-    $row['short_description'] = $short_description;
-    $row['type'] = $type;
-    $row['author_first_name'] = $author_first_name;
-    $row['author_last_name'] = $author_last_name;
-    $row['publisher_name'] = $publisher_name;
-    $row['publisher_address'] = $publisher_address;
-    $row['publish_date'] = $publish_date;
-    $row['status'] = $status;
-  } else {
-    $result_message = "Error: " . $statement->error;
-  }
-
-  $statement->close();
-}
-
-
-if (isset($_POST['update'])) {
-  update_medium();
   $conn->close();
 }
 
@@ -143,62 +109,62 @@ if (isset($_POST['update'])) {
     <form method="POST">
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="title">Title:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['title'] ?>" type="text" name="title" id="title" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $title ?>" type="text" name="title" id="title" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="image">Image:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['image'] ?>" type="text" name="image" id="image" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $image ?>" type="text" name="image" id="image" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="isbn_code">ISBN:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['isbn_code'] ?>" type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $isbn_code ?>" type="text" name="isbn_code" id="isbn_code" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="short_description">Short Description:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
-          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"><?= $row['short_description'] ?></textarea>
+          <textarea name="short_description" id="short_description" rows="10" maxlength="800" class="form-control"><?= $short_description ?></textarea>
         </div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="type">Type:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['type'] ?>" type="text" name="type" id="type" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $type ?>" type="text" name="type" id="type" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_first_name">Author First Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['author_first_name'] ?>" type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $author_first_name ?>" type="text" name="author_first_name" id="author_first_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="author_last_name">Author Last Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['author_last_name'] ?>" type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $author_last_name ?>" type="text" name="author_last_name" id="author_last_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_name">Publisher Name:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publisher_name'] ?>" type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $publisher_name ?>" type="text" name="publisher_name" id="publisher_name" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publisher_address">Publisher Address:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publisher_address'] ?>" type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $publisher_address ?>" type="text" name="publisher_address" id="publisher_address" class="form-control"></div>
       </div>
 
       <div class="row mb-2">
         <div class="col-3 col-md-2"><label class="form-label" for="publish_date">Publish Date:</label></div>
-        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $row['publish_date'] ?>" type="text" name="publish_date" id="publish_date" class="form-control"></div>
+        <div class="col-8 col-sm-6 col-md-4"><input value="<?= $publish_date ?>" type="text" name="publish_date" id="publish_date" placeholder="YYYY-MM-DD" class="form-control"></div>
       </div>
 
       <div class="row mb-4">
         <div class="col-3 col-md-2"><label class="form-label" for="status">Status:</label></div>
         <div class="col-8 col-sm-6 col-md-4">
           <select name="status" id="status" class="form-select">
-            <option value="1" <?= ($row['status'] != 0) ? 'selected' : '' ?>>Available</option>
-            <option value="0" <?= ($row['status'] == 0) ? 'selected' : '' ?>>Reserved</option>
+            <option value="1" <?= ($status != 0) ? 'selected' : '' ?>>Available</option>
+            <option value="0" <?= ($status == 0) ? 'selected' : '' ?>>Reserved</option>
           </select>
         </div>
       </div>
