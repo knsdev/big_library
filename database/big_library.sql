@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `be25_exam4_kimschlueter_biglibrary`
+-- Database: `big_library`
 --
-CREATE DATABASE IF NOT EXISTS `be25_exam4_kimschlueter_biglibrary` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `be25_exam4_kimschlueter_biglibrary`;
+CREATE DATABASE IF NOT EXISTS `big_library` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `big_library`;
 
 -- --------------------------------------------------------
 
