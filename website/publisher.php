@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-// Not logged in, go back to login page
-if (!isset($_SESSION["user"]) && !isset($_SESSION["admin"])) {
-  header("location: user_login.php");
-}
-
 require_once './components/db_connect.php';
 require_once './components/media_card_layout.php';
 require_once './components/modal.php';

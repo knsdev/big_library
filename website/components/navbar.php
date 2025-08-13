@@ -5,13 +5,20 @@
         <h1 class="text-center my-0 me-3">Big Library</h1>
       </a>
       <ul class='nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0'>
-        <?php if (isset($_SESSION['user']) || isset($_SESSION['admin'])) { ?>
-          <li><a href='index.php' class='nav-link px-2 link-body-emphasis'>Home</a></li>
-        <?php } ?>
+        <li><a href='index.php' class='btn btn-outline-dark me-3'>Home</a></li>
         <?php if (isset($_SESSION['admin'])) { ?>
-          <li><a href='admin_dashboard.php' class='nav-link px-2 link-body-emphasis'>Dashboard</a></li>
+          <li><a href='admin_dashboard.php' class='btn btn-outline-dark me-3'>Dashboard</a></li>
+        <?php } else { ?>
+          <?php if (
+            !isset($_SESSION['user']) && !isset($_SESSION['admin'])
+            && !str_contains($_SERVER['SCRIPT_NAME'], 'user_login.php')
+            && !str_contains($_SERVER['SCRIPT_NAME'], 'user_register.php')
+          ) { ?>
+            <li>
+              <a href="user_login.php" class="btn btn-outline-primary me-3">Sign In</a>
+            </li>
+          <?php } ?>
         <?php } ?>
-        <!-- <li><a href='#' class='nav-link px-2 link-secondary'>Inventory</a></li> -->
       </ul>
       <?php if (isset($_SESSION['user']) || isset($_SESSION['admin'])) { ?>
         <div class='dropdown text-end'>
