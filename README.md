@@ -11,6 +11,7 @@ A web app built with PHP and MySQL that lets users manage media (books, DVDs, CD
 - Search and filter through the library
 - Simple, clean interface using Bootstrap
 - Delete confirm modal
+- File upload for user profile picture
 
 ## Setup
 
