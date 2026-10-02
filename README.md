@@ -2,8 +2,6 @@
 
 A web app built with PHP and MySQL that lets users manage media (books, DVDs, CDs).
 
-[Live Demo](https://kim.codefactory.live/big_library/)
-
 ## Features
 
 - List of media with cover images and details
